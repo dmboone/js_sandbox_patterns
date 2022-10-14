@@ -123,16 +123,17 @@ members.forEach(function(member){
 });
 
 // OBSERVER PATTERN
-function EventObserver(){
-    this.observers = [];
-}
+class EventObserver{
+    constructor(){
+        this.observers = [];
+    }
 
-EventObserver.prototype = {
-    subsribe: function(fn){
+    subsribe(fn){
         this.observers.push(fn);
         console.log(`You are now subscribed to ${fn.name}`);
-    },
-    unsubsribe: function(fn){
+    }
+
+    unsubsribe(fn){
         // Filter out from the list whatever matches the callback function.
         // If there is no match, the callback gets to stay on the list. The filter
         // returns a new list and reassigns the list of observers
@@ -142,8 +143,9 @@ EventObserver.prototype = {
             }
         });
         console.log(`You are now unsubcribed from ${fn.name}`);
-    },
-    fire: function(){
+    }
+
+    fire(){
         this.observers.forEach(function(item){
             item.call();
         });
